@@ -13,6 +13,10 @@
 
 Adafruit_SSD1306 display;
 
+#define SDA1 D2
+#define SDA2 D3
+#define SCL D1
+
 void setup()   {                
   Serial.begin(115200);
 }
@@ -21,13 +25,13 @@ int toggle = true;
 
 void loop() {
   if (toggle) {
-    Serial.println("D2, D1...");
-    Wire.begin(D2, D1); // sda, scl
-    Adafruit_SSD1306 display(2); // sda
+    Serial.println("SDA1, SCL...");
+    Wire.begin(SDA1, SCL);
+    Adafruit_SSD1306 display(SDA1);
   } else {
-    Serial.println("D3, D1...");
-    Wire.begin(D3, D1); // sda, scl
-    Adafruit_SSD1306 display(3); // sda
+    Serial.println("SDA2, SCL...");
+    Wire.begin(SDA2, SCL);
+    Adafruit_SSD1306 display(SDA2);
   }
   toggle = !toggle;
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -44,6 +48,4 @@ void testdrawrect(void) {
     delay(1);
   }
 }
-
-
 
